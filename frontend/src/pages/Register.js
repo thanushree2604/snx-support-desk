@@ -37,7 +37,9 @@ export default function Register() {
     <div className="login-page">
       <div className="login-background"></div>
       <div className="login-frame glass-card shadow-lg">
-        <div className="login-brand text-center mb-4">          <img src=\"/snx-logo.svg\" alt=\"SNX Support Desk Logo\" style={{ height: '80px', width: 'auto', marginBottom: '20px' }} />          <h1>Join SNX Support Desk</h1>
+        <div className="login-brand text-center mb-4">
+          <img src="/snx-logo.svg" alt="SNX Support Desk Logo" style={{ height: '80px', width: 'auto', marginBottom: '20px' }} />
+          <h1>Join SNX Support Desk</h1>
           <p className="text-muted">Smart IT Service Management Platform — register and start tracking tickets instantly.</p>
         </div>
 
