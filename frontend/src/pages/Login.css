@@ -1,0 +1,527 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+}
+
+.login-page {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.15), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(139, 92, 246, 0.1), transparent 30%),
+    linear-gradient(135deg, #0f1117 0%, #161b22 100%);
+}
+
+.login-background {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1600&q=80');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.08;
+  filter: blur(3px);
+}
+
+.login-frame {
+  position: relative;
+  width: min(520px, calc(100% - 2rem));
+  padding: 2.5rem;
+  border-radius: 1.5rem;
+  background: rgba(22, 27, 34, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.login-frame .login-brand {
+  color: #f0f4f8;
+  font-weight: 700;
+  text-align: center;
+}
+
+.login-frame .login-brand h1 {
+  font-size: 2rem;
+  margin: 0 0 0.5rem 0;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
+}
+
+.login-frame .login-brand p {
+  color: #adb5bd;
+  font-size: 0.95rem;
+  margin: 0;
+  font-weight: 400;
+}
+
+.login-frame .form-control,
+.login-frame .form-select {
+  background: rgba(22, 27, 34, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #e9ecef !important;
+  border-radius: 1rem !important;
+  min-height: 3.5rem;
+  font-weight: 400;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.login-frame .form-control::placeholder {
+  color: rgba(173, 181, 189, 0.6);
+}
+
+.login-frame .form-control:focus,
+.login-frame .form-select:focus {
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+  background: rgba(22, 27, 34, 0.8) !important;
+}
+
+.login-form {
+  margin-top: 1.5rem;
+}
+
+.login-form .form-label {
+  color: #e9ecef;
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+  text-transform: capitalize;
+  letter-spacing: 0.3px;
+}
+
+.login-form .form-check-label {
+  color: #adb5bd;
+  font-weight: 400;
+  font-size: 0.95rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.login-form .btn {
+  min-height: 3.5rem;
+  border-radius: 1rem;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.3px;
+  transition: all 0.3s ease;
+}
+
+.login-form .btn-primary {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  border: none;
+  color: #ffffff;
+}
+
+.login-form .btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+  box-shadow: 0 12px 24px rgba(59, 130, 246, 0.4);
+  transform: translateY(-2px);
+}
+
+.login-form .btn-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Landing Page Styles */
+.landing-page {
+  position: relative;
+  background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.15), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(139, 92, 246, 0.1), transparent 30%),
+    linear-gradient(135deg, #0f1117 0%, #161b22 100%);
+  color: #e9ecef;
+}
+
+.landing-navbar {
+  position: relative;
+  background: rgba(22, 27, 34, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 100;
+}
+
+.landing-brand h2 {
+  color: #f0f4f8;
+  font-weight: 700;
+  font-size: 1.8rem;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+}
+
+.landing-hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.landing-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1600&q=80');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.06;
+  filter: blur(3px);
+  z-index: 0;
+}
+
+.landing-content {
+  position: relative;
+  z-index: 1;
+}
+
+.landing-content h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 0 0 1.5rem 0;
+  background: linear-gradient(135deg, #60a5fa 0%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -1px;
+}
+
+.landing-content .lead {
+  font-size: 1.25rem;
+  color: #adb5bd;
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+.landing-features {
+  position: relative;
+  z-index: 1;
+}
+
+.feature-item {
+  padding: 1.75rem;
+  border-radius: 1rem;
+  background: rgba(22, 27, 34, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+  background: rgba(22, 27, 34, 0.8);
+  border-color: #3b82f6;
+  box-shadow: 0 12px 24px rgba(59, 130, 246, 0.15);
+  transform: translateY(-4px);
+}
+
+.feature-icon {
+  font-size: 3rem;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.feature-item h5 {
+  color: #f0f4f8;
+  font-weight: 600;
+  font-size: 1.25rem;
+  margin: 0 0 0.75rem 0;
+  letter-spacing: 0.3px;
+}
+
+.feature-item p {
+  color: #adb5bd;
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 400;
+}
+
+.landing-cta {
+  position: relative;
+  background: radial-gradient(circle at bottom right, rgba(59, 130, 246, 0.08), transparent 40%);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.landing-cta h3 {
+  color: #f0f4f8;
+  font-weight: 700;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  letter-spacing: -0.5px;
+}
+
+.landing-cta p {
+  color: #adb5bd;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.landing-workspace {
+  position: relative;
+  z-index: 1;
+}
+
+.landing-support-team {
+  position: relative;
+  z-index: 1;
+}
+
+.section-heading h3 {
+  color: #f8fafc;
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.info-card {
+  background: rgba(22, 27, 34, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.5rem;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.16);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(59, 130, 246, 0.35);
+  box-shadow: 0 20px 40px rgba(59, 130, 246, 0.12);
+}
+
+.info-card h5 {
+  color: #f8fafc;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.info-card ul li {
+  margin-bottom: 0.55rem;
+  line-height: 1.75;
+}
+
+.section-heading p {
+  color: #94a3b8;
+  max-width: 680px;
+}
+
+.landing-navbar .btn {
+  min-height: 2.9rem;
+}
+
+.landing-navbar .btn-outline-light {
+  color: #e2e8f0;
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.landing-navbar .btn-outline-light:hover {
+  color: #ffffff;
+  border-color: rgba(59, 130, 246, 0.7);
+}
+
+.landing-stat-card {
+  background: rgba(22, 27, 34, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.25rem;
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.18);
+}
+
+.stat-pill {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  padding: 1rem;
+  color: #e9ecef;
+  min-height: 100px;
+}
+
+.stat-pill span {
+  display: block;
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+}
+
+.stat-pill small {
+  color: #94a3b8;
+}
+
+.stat-pill-success {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.25);
+}
+
+.stat-pill-warning {
+  background: rgba(245, 158, 11, 0.12);
+  border-color: rgba(245, 158, 11, 0.25);
+}
+
+.stat-pill-info {
+  background: rgba(14, 165, 233, 0.12);
+  border-color: rgba(14, 165, 233, 0.25);
+}
+
+.landing-dashboard-graphic {
+  background: rgba(22, 27, 34, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.5rem;
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.18);
+}
+
+.dashboard-header p,
+.dashboard-lead p {
+  color: #94a3b8;
+}
+
+.dashboard-header h5 {
+  color: #f8fafc;
+  margin: 0;
+}
+
+.dashboard-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.85rem;
+  min-height: 220px;
+}
+
+.chart-bar {
+  flex: 1;
+  position: relative;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.chart-bar span {
+  position: absolute;
+  top: -1.75rem;
+  font-size: 0.85rem;
+  color: #cbd5e1;
+  white-space: nowrap;
+}
+
+.chart-bar.active {
+  background: linear-gradient(180deg, rgba(59, 130, 246, 0.9), rgba(37, 99, 235, 0.35));
+}
+
+.chart-bar:not(.active) {
+  background: rgba(244, 244, 245, 0.08);
+}
+
+.dashboard-lead {
+  gap: 1rem;
+}
+
+.dashboard-lead h4 {
+  color: #f8fafc;
+  margin: 0;
+}
+
+.landing-testimonials .testimonial-card {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.25rem;
+  background: rgba(22, 27, 34, 0.86);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.13);
+}
+
+.testimonial-text {
+  color: #e2e8f0;
+  font-size: 0.98rem;
+  margin-bottom: 1rem;
+}
+
+.testimonial-meta strong {
+  display: block;
+  color: #f8fafc;
+}
+
+.testimonial-meta span {
+  color: #94a3b8;
+}
+
+/* Link Styling */
+a {
+  color: #60a5fa;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: #3b82f6;
+}
+
+.text-info {
+  color: #06b6d4 !important;
+}
+
+.text-info:hover {
+  color: #22d3ee !important;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .login-frame {
+    width: calc(100% - 1rem);
+    padding: 2rem;
+  }
+
+  .landing-content h1 {
+    font-size: 2rem;
+  }
+
+  .landing-features {
+    margin-top: 3rem;
+  }
+
+  .landing-content {
+    margin-bottom: 2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .login-frame {
+    padding: 1.5rem;
+  }
+
+  .login-frame .login-brand h1 {
+    font-size: 1.5rem;
+  }
+
+  .landing-content h1 {
+    font-size: 1.75rem;
+  }
+
+  .landing-navbar {
+    padding: 1rem !important;
+  }
+
+  .landing-navbar .gap-2 {
+    gap: 0.5rem !important;
+  }
+
+  .landing-navbar .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+

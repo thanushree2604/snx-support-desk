@@ -1,0 +1,31 @@
+<svg viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+  <!-- Headphones with chat bubble -->
+  <circle cx="365" cy="180" r="55" fill="none" stroke="#003da6" stroke-width="8"/>
+  <circle cx="290" cy="160" r="18" fill="#003da6"/>
+  <circle cx="440" cy="160" r="18" fill="#003da6"/>
+  <path d="M 300 220 Q 300 250 330 250 L 400 250 Q 430 250 430 220" fill="none" stroke="#003da6" stroke-width="8"/>
+  
+  <!-- Chat bubble -->
+  <rect x="320" y="120" width="90" height="60" rx="10" fill="#0052cc"/>
+  <circle cx="335" cy="140" r="5" fill="white"/>
+  <circle cx="355" cy="140" r="5" fill="white"/>
+  <circle cx="375" cy="140" r="5" fill="white"/>
+  <polygon points="350,175 340,195 360,195" fill="#0052cc"/>
+  
+  <!-- Green checkmark -->
+  <path d="M 480 120 Q 520 80 560 140" fill="none" stroke="#22c55e" stroke-width="25" stroke-linecap="round"/>
+  <path d="M 560 140 Q 600 200 680 80" fill="none" stroke="#22c55e" stroke-width="25" stroke-linecap="round"/>
+  
+  <!-- SNX Text -->
+  <text x="400" y="420" font-size="180" font-weight="bold" text-anchor="middle" fill="#003da6" font-family="Arial, sans-serif">SNX</text>
+  
+  <!-- Curve bottom left -->
+  <path d="M 80 500 Q 200 650 350 680" fill="none" stroke="#003da6" stroke-width="20" stroke-linecap="round"/>
+  
+  <!-- Curve bottom right -->
+  <path d="M 450 680 Q 600 650 720 500" fill="none" stroke="#22c55e" stroke-width="20" stroke-linecap="round"/>
+  
+  <!-- Text below -->
+  <text x="400" y="750" font-size="48" font-weight="bold" text-anchor="middle" fill="#003da6" font-family="Arial, sans-serif">SUPPORT DESK</text>
+  <text x="400" y="790" font-size="32" text-anchor="middle" fill="#666" font-family="Arial, sans-serif">SMART IT SERVICE MANAGEMENT PLATFORM</text>
+</svg>
