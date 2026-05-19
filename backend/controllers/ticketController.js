@@ -6,7 +6,7 @@ const mailer = require('../config/mailer');
 
 exports.createTicket = async (req, res) => {
   try {
-    const { title, description, category_id, priority } = req.body;
+    const { title, description, category_id, priority, sentiment } = req.body;
     if (!title || !description || !category_id || !priority) {
       return res.status(400).json({ message: 'All ticket fields are required' });
     }
@@ -17,6 +17,7 @@ exports.createTicket = async (req, res) => {
       title,
       description,
       priority,
+      sentiment,
       status: 'Open'
     });
 

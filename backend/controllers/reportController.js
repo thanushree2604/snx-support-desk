@@ -7,7 +7,18 @@ exports.summary = async (req, res) => {
     const ticketCounts = await ticketModel.getTicketCounts();
     const categoryList = await categoryModel.listCategories();
     const ratingsSummary = await feedbackModel.getRatingsSummary();
-    res.json({ ticketCounts, categories: categoryList, ratingsSummary });
+    const topCategories = await ticketModel.getTopCategories();
+    const monthlyReport = await ticketModel.getMonthlyTicketCounts();
+    const avgResolution = await ticketModel.getAverageResolutionTime();
+
+    res.json({
+      ticketCounts,
+      categories: categoryList,
+      ratingsSummary,
+      topCategories,
+      monthlyReport,
+      avgResolution
+    });
   } catch (error) {
     res.status(500).json({ message: 'Unable to load reports', error: error.message });
   }

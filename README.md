@@ -31,6 +31,7 @@ GitHub repository: https://github.com/thanushree2604/snx-support-desk
 ### 2. Configure backend environment
 1. Copy `backend/.env.example` to `backend/.env`.
 2. Fill in your MySQL credentials, SMTP settings, and `JWT_SECRET`.
+3. Optionally set `OPENAI_API_KEY` to enable richer AI assistant responses.
 
 ### 3. Configure frontend environment (optional)
 1. If needed, copy `frontend/.env.example` to `frontend/.env`.
@@ -64,9 +65,11 @@ npm start
 ## Application Features
 - User registration and login
 - Role-based access for users, support staff, and admins
-- Ticket creation, assignment, priority/status updates
+- Ticket creation with AI-powered category and priority suggestions
+- AI chatbot assistant for common issue troubleshooting
+- Sentiment-aware ticket triage and urgency detection
 - Real-time Socket.io chat per ticket
-- Admin dashboard with analytics and reports
+- Admin dashboard with enhanced analytics, top issue categories, and monthly trends
 - Feedback submission and rating system
 - Category management and ticket filtering
 - Email notifications for ticket events

@@ -2,8 +2,16 @@ const db = require('../config/db');
 
 exports.createTicket = async (ticket) => {
   const [result] = await db.query(
-    'INSERT INTO tickets (user_id, category_id, title, description, priority, status) VALUES (?, ?, ?, ?, ?, ?)',
-    [ticket.user_id, ticket.category_id, ticket.title, ticket.description, ticket.priority, ticket.status || 'Open']
+    'INSERT INTO tickets (user_id, category_id, title, description, priority, status, sentiment) VALUES (?, ?, ?, ?, ?, ?, ?)',
+    [
+      ticket.user_id,
+      ticket.category_id,
+      ticket.title,
+      ticket.description,
+      ticket.priority,
+      ticket.status || 'Open',
+      ticket.sentiment || 'Neutral'
+    ]
   );
   return { id: result.insertId };
 };
@@ -135,6 +143,42 @@ exports.getTicketCounts = async () => {
     closed_count: 0,
     total_count: 0
   };
+};
+
+exports.getTopCategories = async () => {
+  const [rows] = await db.query(
+    `SELECT c.category_name,
+      COUNT(t.id) AS ticket_count
+     FROM tickets t
+     LEFT JOIN categories c ON t.category_id = c.id
+     GROUP BY c.category_name
+     ORDER BY ticket_count DESC
+     LIMIT 5`
+  );
+  return rows;
+};
+
+exports.getMonthlyTicketCounts = async () => {
+  const [rows] = await db.query(
+    `SELECT DATE_FORMAT(created_at, '%Y-%m') AS month,
+      COUNT(*) AS total_count,
+      SUM(status = 'Closed') AS closed_count,
+      SUM(status <> 'Closed') AS open_count
+     FROM tickets
+     GROUP BY month
+     ORDER BY month DESC
+     LIMIT 6`
+  );
+  return rows.reverse();
+};
+
+exports.getAverageResolutionTime = async () => {
+  const [rows] = await db.query(
+    `SELECT AVG(TIMESTAMPDIFF(MINUTE, created_at, updated_at)) AS avg_resolution_minutes
+     FROM tickets
+     WHERE status = 'Resolved'`
+  );
+  return rows[0] || { avg_resolution_minutes: 0 };
 };
 
 exports.getCategoryPerformance = async () => {

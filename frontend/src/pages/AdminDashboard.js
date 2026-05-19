@@ -119,6 +119,25 @@ export default function AdminDashboard() {
     ]
   };
 
+  const topCategories = summary.topCategories || [];
+  const monthlyLabels = (summary.monthlyReport || []).map((item) => item.month);
+  const monthlyData = {
+    labels: monthlyLabels,
+    datasets: [
+      {
+        label: 'Opened',
+        backgroundColor: '#38bdf8',
+        data: (summary.monthlyReport || []).map((item) => item.total_count)
+      },
+      {
+        label: 'Closed',
+        backgroundColor: '#22c55e',
+        data: (summary.monthlyReport || []).map((item) => item.closed_count)
+      }
+    ]
+  };
+  const avgResolution = Number(summary.avgResolution?.avg_resolution_minutes || 0).toFixed(0);
+
   return (
     <div className="container-fluid page-shell py-4">
       <div className="row gx-4">
@@ -148,6 +167,9 @@ export default function AdminDashboard() {
             </div>
             <div className="col-sm-6 col-lg-3">
               <StatisticsCard title="Feedbacks" value={summary.ratingsSummary?.total_feedback || 0} icon="⭐" accent="text-secondary" />
+            </div>
+            <div className="col-sm-6 col-lg-3">
+              <StatisticsCard title="Avg Resolution" value={`${avgResolution} min`} icon="⏱️" accent="text-info" />
             </div>
           </div>
 
@@ -215,6 +237,41 @@ export default function AdminDashboard() {
                     <div className="progress-bar bg-warning" style={{ width: `${Math.min((summary.ratingsSummary?.improvement_needed || 0) / Math.max(summary.ratingsSummary?.total_feedback || 1, 1) * 100, 100)}%` }} />
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="row g-4 mb-4">
+            <div className="col-lg-6">
+              <div className="bg-panel p-4 h-100">
+                <h5 className="mb-3">Most common issue categories</h5>
+                {topCategories.length ? (
+                  <ul className="list-unstyled text-muted small mb-0">
+                    {topCategories.map((category) => (
+                      <li key={category.category_name} className="mb-2">
+                        <strong>{category.category_name}</strong> — {category.ticket_count} tickets
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="text-muted small mb-0">No category analytics available yet.</p>
+                )}
+              </div>
+            </div>
+            <div className="col-lg-6">
+              <div className="bg-panel p-4 h-100">
+                <h5 className="mb-3">Monthly ticket trends</h5>
+                {monthlyLabels.length ? (
+                  <Bar
+                    data={monthlyData}
+                    options={{
+                      plugins: { legend: { position: 'bottom' } },
+                      scales: { y: { beginAtZero: true } }
+                    }}
+                  />
+                ) : (
+                  <p className="text-muted small mb-0">No monthly data available yet.</p>
+                )}
               </div>
             </div>
           </div>

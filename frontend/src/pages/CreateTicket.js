@@ -11,6 +11,10 @@ export default function CreateTicket() {
   const [categoryId, setCategoryId] = useState('');
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [aiSuggestion, setAiSuggestion] = useState(null);
+  const [aiQuestion, setAiQuestion] = useState('');
+  const [aiReply, setAiReply] = useState('');
+  const [askingAi, setAskingAi] = useState(false);
   const navigate = useNavigate();
   const name = localStorage.getItem('name');
   const role = localStorage.getItem('role');
@@ -40,7 +44,8 @@ export default function CreateTicket() {
         title: title.trim(),
         description: description.trim(),
         category_id: categoryId,
-        priority
+        priority,
+        sentiment: aiSuggestion?.sentiment || 'Neutral'
       });
       alert('Ticket created successfully!');
       navigate('/dashboard', { state: { refresh: Date.now() } });
@@ -51,6 +56,46 @@ export default function CreateTicket() {
     }
   };
 
+  const applyAiSuggestion = () => {
+    if (!aiSuggestion) return;
+    const suggestedCategory = categories.find((cat) =>
+      cat.category_name.toLowerCase().includes(aiSuggestion.categoryName.toLowerCase()) ||
+      aiSuggestion.categoryName.toLowerCase().includes(cat.category_name.toLowerCase())
+    );
+
+    if (suggestedCategory) {
+      setCategoryId(suggestedCategory.id);
+    }
+    setPriority(aiSuggestion.priority || 'Medium');
+  };
+
+  const fetchAiSuggestion = async (currentTitle, currentDescription) => {
+    try {
+      const response = await API.post('/ai/suggest', {
+        title: currentTitle,
+        description: currentDescription
+      });
+      setAiSuggestion(response.data);
+    } catch (error) {
+      console.error('AI suggestion failed', error);
+      setAiSuggestion(null);
+    }
+  };
+
+  const askAi = async () => {
+    if (!aiQuestion.trim()) return;
+    setAskingAi(true);
+    try {
+      const response = await API.post('/ai/chat', { message: aiQuestion });
+      setAiReply(response.data.reply);
+    } catch (error) {
+      console.error('AI chatbot failed', error);
+      setAiReply('I could not process that request right now. Please try again.');
+    } finally {
+      setAskingAi(false);
+    }
+  };
+
   const handleCancel = () => {
     navigate('/dashboard');
   };
@@ -58,6 +103,16 @@ export default function CreateTicket() {
   useEffect(() => {
     fetchCategories();
   }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (title.trim() || description.trim()) {
+        fetchAiSuggestion(title, description);
+      }
+    }, 700);
+
+    return () => clearTimeout(timer);
+  }, [title, description]);
 
   return (
     <div className="container-fluid page-shell py-4">
@@ -168,6 +223,65 @@ export default function CreateTicket() {
             </div>
 
             <div className="col-lg-4">
+              <div className="bg-panel p-4 mb-4">
+                <h5 className="mb-3">AI Assistant</h5>
+                {aiSuggestion ? (
+                  <>
+                    <div className="mb-3">
+                      <div className="d-flex justify-content-between align-items-center mb-2">
+                        <span className="text-muted">Suggested category</span>
+                        <strong>{aiSuggestion.categoryName}</strong>
+                      </div>
+                      <div className="d-flex justify-content-between align-items-center mb-2">
+                        <span className="text-muted">Priority</span>
+                        <strong>{aiSuggestion.priority}</strong>
+                      </div>
+                      <div className="d-flex justify-content-between align-items-center mb-2">
+                        <span className="text-muted">Sentiment</span>
+                        <strong>{aiSuggestion.sentiment}</strong>
+                      </div>
+                    </div>
+                    <div className="mb-3">
+                      <h6 className="mb-2">Troubleshooting hint</h6>
+                      <p className="small text-muted">{aiSuggestion.botReply}</p>
+                      <button type="button" className="btn btn-sm btn-outline-light" onClick={applyAiSuggestion}>
+                        Apply AI suggestion
+                      </button>
+                    </div>
+                    <hr className="border-secondary" />
+                  </>
+                ) : (
+                  <p className="text-muted small">Enter a title or description to get category and priority suggestions.</p>
+                )}
+
+                <div className="mb-3">
+                  <h6 className="mb-2">Ask the chatbot</h6>
+                  <textarea
+                    className="form-control bg-dark text-white border-0 mb-3"
+                    rows="3"
+                    placeholder="Ask the support bot for quick fixes"
+                    value={aiQuestion}
+                    onChange={(e) => setAiQuestion(e.target.value)}
+                    disabled={askingAi}
+                  />
+                  <button
+                    type="button"
+                    className="btn btn-primary btn-sm w-100"
+                    onClick={askAi}
+                    disabled={askingAi || !aiQuestion.trim()}
+                  >
+                    {askingAi ? 'Thinking...' : 'Ask AI'}
+                  </button>
+                </div>
+
+                {aiReply && (
+                  <div className="bg-dark p-3 rounded mt-3">
+                    <h6 className="mb-2">AI response</h6>
+                    <p className="small text-muted mb-0">{aiReply}</p>
+                  </div>
+                )}
+              </div>
+
               <div className="bg-panel p-4">
                 <h5 className="mb-3">Tips for a Great Ticket</h5>
                 <ul className="text-muted small">
