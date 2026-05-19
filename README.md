@@ -1,93 +1,88 @@
 # Live Chat Support Dashboard
 
-Enterprise-grade live support ticketing, real-time chat, admin analytics, and role-based service desk automation.
+A support desk application with real-time chat, ticketing, role-based access, admin analytics, and feedback management.
 
-## Project Structure
-- `backend/` � Node.js, Express, MySQL, Socket.io, authentication, ticketing, reports
-- `frontend/` � React, Bootstrap, Axios, React Router, real-time chat UI
-- `database/` � MySQL schema for XAMPP/phpMyAdmin
+GitHub repository: https://github.com/thanushree2604/snx-support-desk
+
+## Project Overview
+- `backend/` – Node.js + Express server with MySQL, Socket.io, JWT authentication, ticket APIs, reporting, and email support.
+- `frontend/` – React application with Bootstrap, Axios, React Router, and live ticket chat functionality.
+- `database/` – MySQL schema definitions and sample SQL for `support_dashboard`.
+- `scripts/` – Optional Python utility to load or reset the database schema.
+
+## Tech Stack
+- Backend: Node.js, Express, MySQL, Socket.io, bcrypt, JWT, nodemailer
+- Frontend: React, Bootstrap, Axios, React Router, chart.js
+- Database: MySQL (XAMPP-compatible schema)
 
 ## Requirements
-- Node.js 18+
+- Node.js 18 or newer
 - npm
-- XAMPP (Apache + MySQL)
-- MySQL database named `support_dashboard`
+- MySQL server (XAMPP recommended for local development)
+- Git
 
-## Setup Instructions
+## Setup
 
-### 1. Import the SQL schema
-1. Start Apache and MySQL in XAMPP Control Panel.
-2. Open phpMyAdmin.
-3. Import `database/support_dashboard.sql`.
-
-### 1a. Optional Python schema import
-1. Install Python dependencies:
-```bash
-cd scripts
-python -m pip install -r requirements.txt
-```
-2. Run the helper script:
-```bash
-python load_schema.py
-```
+### 1. Import database schema
+1. Start MySQL (via XAMPP or your local MySQL service).
+2. Create a database named `support_dashboard`.
+3. Import `database/support_dashboard.sql` using phpMyAdmin or MySQL CLI.
 
 ### 2. Configure backend environment
 1. Copy `backend/.env.example` to `backend/.env`.
-2. Update database and SMTP values as needed.
+2. Fill in your MySQL credentials, SMTP settings, and `JWT_SECRET`.
 
-### 2a. Configure frontend environment
-1. Copy `frontend/.env.example` to `frontend/.env` if you need a custom API or socket URL.
-2. The default values already target `http://localhost:5000`.
+### 3. Configure frontend environment (optional)
+1. If needed, copy `frontend/.env.example` to `frontend/.env`.
+2. Update `REACT_APP_API_URL` or socket URL if the backend is not at `http://localhost:5000`.
 
-### 3. Install backend dependencies
+### 4. Install dependencies
 ```bash
 cd backend
 npm install
-```
 
-### 4. Install frontend dependencies
-```bash
 cd ../frontend
 npm install
 ```
 
-### 5. Run the backend server
+### 5. Run the application
 ```bash
 cd backend
 npm run dev
 ```
 
-### 6. Run the frontend app
+In another terminal:
 ```bash
 cd frontend
 npm start
 ```
 
-## Application URLs
+## Local URLs
 - Frontend: `http://localhost:3000`
-- Backend: `http://localhost:5000`
-- phpMyAdmin: `http://localhost/phpmyadmin`
+- Backend API: `http://localhost:5000`
 
-## New Support Pages
-- `Help & Support` page for guidance, live chat access, and support resources.
-- `Feedback` page so users can submit ratings and comments for their ticket experience.
+## Application Features
+- User registration and login
+- Role-based access for users, support staff, and admins
+- Ticket creation, assignment, priority/status updates
+- Real-time Socket.io chat per ticket
+- Admin dashboard with analytics and reports
+- Feedback submission and rating system
+- Category management and ticket filtering
+- Email notifications for ticket events
 
-## Default Data and Notes
-- Use the registration screen to create a new account.
-- Set a user as `support` or `admin` via the backend to unlock staff/admin dashboards.
-- Real-time chat is ticket-based and uses Socket.io rooms.
-- Notification emails require SMTP credentials in `.env`.
+## Notes
+- Use the registration page to create the initial user account.
+- Admin/support roles must be assigned through the database or admin interface.
+- Ensure SMTP credentials are valid for sending notification emails.
 
-## Deployment Guide
-1. Deploy the backend to a Node.js host with MySQL access.
+## Deployment
+1. Deploy the backend to any Node.js host with MySQL access.
 2. Build the frontend with `npm run build`.
-3. Serve the React build from static hosting or connect to the backend API.
-4. Configure environment variables on the server and ensure `JWT_SECRET` is secure.
+3. Host the frontend build on static web hosting or serve through the backend.
+4. Set environment variables for production secrets and database connection.
 
-## Features
-- JWT authentication with bcrypt password hashing
-- Role-based routes for user, support, admin
-- Ticket creation, assignment, status tracking
-- Real-time ticket chat and message history
-- Admin reports, performance analytics, category management
-- MySQL XAMPP-compatible schema with audit logs and feedback
+## Repository
+This project is published at:
+
+https://github.com/thanushree2604/snx-support-desk
